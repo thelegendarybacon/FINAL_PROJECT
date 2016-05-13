@@ -4,14 +4,32 @@ Pokemon Class
 Stores used to make a pokemon object storing the specific pokemon's data
 */
 
+import java.util.ArrayList;
+
 public class Pokemon
 {
-	public MoveList list = new MoveList();
+	public MoveList atks = new MoveList();
 
 	private String name, type;
 	private Move move1, move2, move3, move4;
 	private int hp, PP;
-	private Move[] moves;
+	private ArrayList<Move> moves;
+
+	public Pokemon()
+	{
+		this.name = "";
+		this.hp = 0;
+		this.PP = 0;
+	}
+
+	public Pokemon(Pokemon inherit)
+	{
+		this.name = inherit.getName();
+		this.hp = inherit.getHP();
+		this.PP = inherit.getPP();
+		this.moves = inherit.getMoves();
+	}
+
 
 	public Pokemon(String who, int health)
 	{
@@ -21,49 +39,57 @@ public class Pokemon
 
 		if(name.equals("Pikachu"))
 		{
-			this.moves = list.pikachuMoves();
+			/*
+			for(int i = 0; i< 4; i++)
+			{
+				this.moves.add(atks.pikachuMoves().get(i));
+			}
+			*/
+
+
+			this.moves = atks.pikachuMoves();
 			this.type = "Electric";
 		}
 
 		else if(name.equals("Arceus"))
 		{
-			this.moves = list.arceusMoves();
+			this.moves = atks.arceusMoves();
 			this.type = "Normal";
 		}
 
 		else if(name.equals("Blastoise"))
 		{
-			this.moves = list.blastoiseMoves();
+			this.moves = atks.blastoiseMoves();
 			this.type = "Water";
 		}
 
 		else if(name.equals("Charizard"))
 		{
-			this.moves = list.charizardMoves();
+			this.moves = atks.charizardMoves();
 			this.type = "Fire";
 		}
 
 		else if(name.equals("Magikarp"))
 		{
-			this.moves = list.magikarpMoves();
+			this.moves = atks.magikarpMoves();
 			this.type = "Water";
 		}
 
 		else if(name.equals("Mewtwo"))
 		{
-			this.moves = list.mewtwoMoves();
+			this.moves = atks.mewtwoMoves();
 			this.type = "Normal";
 		}
 
 		else if(name.equals("Shuckle"))
 		{
-			this.moves = list.shuckleMoves();
+			this.moves = atks.shuckleMoves();
 			this.type = "Normal";
 		}
 
 		else if(name.equals("Venusaur"))
 		{
-			this.moves = list.venusaurMoves();
+			this.moves = atks.venusaurMoves();
 			this.type = "Grass";
 		}
 
@@ -95,9 +121,14 @@ public class Pokemon
 		return name;
 	}
 
-	public Move[] getMoves()
+	public ArrayList<Move> getMoves()
 	{
 		return moves;
+	}
+
+	public void struggle()
+	{
+		this.atks.addStruggle();
 	}
 
 	public String getType()
@@ -139,25 +170,25 @@ public class Pokemon
 	public void attack(Pokemon poke, int move)
 	{
 		move = move - 1;
-		Move[] a = moves;
+		ArrayList<Move> a = moves;
 
-		if(a[move].getName().equals("Synthesis"))
+		if(a.get(move).getName().equals("Synthesis"))
 			this.takeDMG(-250);
-		else if((a[move].getName().equals("Evolve")) || (a[move].getName().equals("MegaEvolve")))
+		else if((a.get(move).getName().equals("Evolve")) || (a.get(move).getName().equals("MegaEvolve")))
 		{
 			System.out.print(this.getName() + " evolved into ");
 			this.evolve();
-			System.out.println(this.getName() + "!");
+			System.out.println(this.getName() + "!\n");
 		}
 		else
 		{
-			int dmg = a[move].getDamage() * effect(a[move],poke);
+			int dmg = a.get(move).getDamage() * effect(a.get(move),poke);
 			poke.takeDMG(dmg);
 
 			System.out.println(this.getName() + " attacks " + poke.getName() + " for " + dmg + "\n");
 		}
 
-		this.reducePP(a[move].getPP());
+		this.reducePP(a.get(move).getPP());
 
 
 	}
@@ -170,21 +201,21 @@ public class Pokemon
 		if(this.getName().equals("Charizard"))
 		{
 			this.name = name + " Mega";
-			this.moves = list.charizardMMoves();
+			this.moves = atks.charizardMMoves();
 			this.takeDMG(-1000);
 		}
 
 		else if(this.getName().equals("Mewtwo"))
 		{
 			this.name = name + " Mega";
-			this.moves = list.mewtwoMMoves();
+			this.moves = atks.mewtwoMMoves();
 			this.takeDMG(-1000);
 		}
 
 		else if(this.getName().equals("Magikarp"))
 		{
 			this.name = "Gyarados";
-			this.moves = list.gyaradosMoves();
+			this.moves = atks.gyaradosMoves();
 			this.takeDMG(-2000);
 		}
 	}

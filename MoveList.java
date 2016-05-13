@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class MoveList
 {
-	private ArrayList<Move> list;
+	public ArrayList<Move> list = new ArrayList<Move>();
 
 /*
 	private Move arceusA, arceusB, arceusC, arceusD;
@@ -72,7 +72,7 @@ public class MoveList
 	Move pikachuD = new Move("Surf", 90, "Water", 10);
 
 	Move shuckleA = new Move("Body Slam", 85, "Normal", 5);
-	Move shuckleB = new Move("Rock Slide", 75, "Normal", 5);
+	Move shuckleB = new Move("Rock Slide", 75, "Normal", -5);
 	Move shuckleC = new Move("Darude Sandstorm", 150, "Normal", 75);
 	Move shuckleD = new Move("Don't F***le with shuckle", 250, "Normal", 100);
 
@@ -80,6 +80,8 @@ public class MoveList
 	Move venusaurB = new Move("Synthesis", 0, "Grass", 10);
 	Move venusaurC = new Move("Photosynthesis", 0, "Grass", -500);
 	Move venusaurD = new Move("Electron Crack Bomb", 500, "Grass", 500);
+
+	Move struggle = new Move("Struggle", 50, "Normal", -15);
 
 
 
@@ -112,6 +114,7 @@ public class MoveList
 
 	public ArrayList<Move> charizardMMoves()
 	{
+		list.clear();
 		list.add(charizardMA);
 		list.add(charizardMB);
 		list.add(charizardMC);
@@ -121,10 +124,11 @@ public class MoveList
 
 	public ArrayList<Move> gyaradosMoves()
 	{
+		list.clear();
 		list.add(gyaradosA);
 		list.add(gyaradosB);
 		list.add(gyaradosC);
-		lsit.add(gyaradosD);
+		list.add(gyaradosD);
 		return list;
 	}
 
@@ -148,6 +152,7 @@ public class MoveList
 
 	public ArrayList<Move> mewtwoMMoves()
 	{
+		list.clear();
 		list.add(mewtwoMA);
 		list.add(mewtwoMB);
 		list.add(mewtwoMC);
@@ -180,6 +185,11 @@ public class MoveList
 		list.add(venusaurC);
 		list.add(venusaurD);
 		return list;
+	}
+
+	public void addStruggle()
+	{
+		list.add(struggle);
 	}
 
 
