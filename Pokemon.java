@@ -28,6 +28,7 @@ public class Pokemon
 		this.hp = inherit.getHP();
 		this.PP = inherit.getPP();
 		this.moves = inherit.getMoves();
+		this.type = inherit.getType();
 	}
 
 
@@ -67,6 +68,7 @@ public class Pokemon
 		{
 			this.moves = atks.charizardMoves();
 			this.type = "Fire";
+
 		}
 
 		else if(name.equals("Magikarp"))
@@ -146,22 +148,22 @@ public class Pokemon
 		if(a.equals("Fire") && p.equals("Grass"))
 		{
 			System.out.println("It's Super Effective!");
-			return 2;
+			return 3;
 		}
 		else if((a.equals("Electric") || a.equals("Grass")) && p.equals("Water"))
 		{
 			System.out.println("It's Super Effective!");
-			return 2;
+			return 3;
 		}
 		else if(a.equals("Water") && p.equals("Fire"))
 		{
 			System.out.println("It's Super Effective!");
-			return 2;
+			return 3;
 		}
 		else if(aName.equals("Rock Slide") && (pName.equals("Charizard") || pName.equals("Charizard Mega")))
 		{
 			System.out.println("It's Super Effective!");
-			return 99999;
+			return 999;
 		}
 		else
 			return 1;
@@ -189,7 +191,6 @@ public class Pokemon
 		}
 
 		this.reducePP(a.get(move).getPP());
-
 
 	}
 

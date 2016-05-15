@@ -83,7 +83,12 @@ public class PokeBattle
 			turn = 1;
 			pokeA.attack(pokeB,moveSelect(pokeA));
 			turn = 2;
-			pokeB.attack(pokeA,moveSelect(pokeB));
+			if(checkFaint(pokeB) == false)
+				pokeB.attack(pokeA,moveSelect(pokeB));
+			else
+				System.out.println(pokeB.getName() + " fainted!\n");
+			if(checkFaint(pokeA))
+				System.out.println(pokeA.getName() + " fainted!\n");
 		}
 
 	}
@@ -91,15 +96,18 @@ public class PokeBattle
 	public static boolean checkFaint(Pokemon check)
 	{
 		if(check.getHP() <= 0)
+		{
+			//System.out.println(check.getName() + " fainted!\n");
 			return true;
+		}
 		else
 			return false;
 	}
 
 	public static void letsFight(Trainer student, Trainer hayes)
 	{
-		int stuTeam = student.teamSize();
-		int hayesTeam = hayes.teamSize();
+		int stuTeam = student.teamSize()-1;
+		int hayesTeam = hayes.teamSize()-1;
 
 		int currentPokeS = 0;
 		int currentPokeH = 0;
@@ -120,6 +128,11 @@ public class PokeBattle
 
 			battle(student.getTeam().get(currentPokeS),hayes.getTeam().get(currentPokeH));
 		}
+
+		if(stuTeam > hayesTeam)
+			System.out.println("Player " + student.getPlayer() + " Wins!");
+		else if(hayesTeam > stuTeam)
+			System.out.println("Player " + student.getPlayer() + " Wins!");
 	}
 
 
@@ -155,6 +168,8 @@ public class PokeBattle
 	{
 		System.out.println(pokeA.getName() + ":  " + pokeA.getHP() + "\t\t\t" + pokeB.getName() + ":  " + pokeB.getHP());
 		System.out.println("     PP:  " + pokeA.getPP() + "\t\t\t" + "   PP:  " + pokeB.getPP() + "\n");
+
+		//System.out.println("Type: " + pokeA.getType() + "\t\t\tType: " + pokeB.getType());
 	}
 
 
