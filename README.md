@@ -1,2 +1,4 @@
 # FINAL_PROJECT
-final project with david mo
+Authors: Alec Bakker, David Mo
+
+To run, open PokeBattle and Run
