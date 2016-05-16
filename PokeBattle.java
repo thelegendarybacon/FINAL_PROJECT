@@ -1,3 +1,5 @@
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -28,6 +30,12 @@ public class PokeBattle
 		choices.add(new Pokemon("Venusaur",1200));
 		choices.add(new Pokemon("Magikarp",600));
 
+
+		String bip = "music\\trainer_theme.mp3";
+		Media hit = new Media(bip);
+		MediaPlayer music = new MediaPlayer(hit);
+
+
 		//playerA = choices.get(0);
 		//playerB = choices.get(7);
 /*
@@ -44,6 +52,7 @@ public class PokeBattle
 		teamSelect(alec);
 		teamSelect(david);
 
+		music.play();
 		letsFight(alec,david);
 
 	}
