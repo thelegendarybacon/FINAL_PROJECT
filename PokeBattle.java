@@ -2,6 +2,11 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.awt.*;
+import javax.swing.*;
+import java.applet.Applet;
+import java.io.*;
+import java.awt.event.*;
 
 public class PokeBattle
 {
@@ -10,24 +15,26 @@ public class PokeBattle
 	public static Pokemon pokeA = new Pokemon();
 	public static Pokemon pokeB = new Pokemon();
 
+	public static Trainer alec, david;
+
 	public static MoveList list = new MoveList();
 
-	public static int turn;
+	public static int turn, currentPokeS, currentPokeH;
 
 	public static ArrayList<Pokemon> choices = new ArrayList<Pokemon>();
 
-	public static void main(String[] args)
+	public void battle()
 	{
-		Trainer alec = new Trainer("Alec",1);
-		Trainer david = new Trainer("David",2);
+		alec = new Trainer("Alec",1);
+		david = new Trainer("David",2);
 
 		choices.add(new Pokemon("Pikachu",700));
-		choices.add(new Pokemon("Arceus",700));
+		//choices.add(new Pokemon("Arceus",700));
 		choices.add(new Pokemon("Blastoise",1200));
 		choices.add(new Pokemon("Charizard",500));
 		choices.add(new Pokemon("Mewtwo",1000));
 		choices.add(new Pokemon("Shuckle",1500));
-		choices.add(new Pokemon("Venusaur",1200));
+		//choices.add(new Pokemon("Venusaur",1200));
 		choices.add(new Pokemon("Magikarp",600));
 
 
@@ -38,23 +45,45 @@ public class PokeBattle
 
 		//playerA = choices.get(0);
 		//playerB = choices.get(7);
-/*
-		alec.addPokemon(choices.get(5));
+
+		alec.addPokemon(choices.get(1));
+		alec.addPokemon(choices.get(3));
 		alec.addPokemon(choices.get(4));
-		alec.addPokemon(choices.get(2));
-		david.addPokemon(choices.get(1));
-		david.addPokemon(choices.get(3));
+		david.addPokemon(choices.get(5));
 		david.addPokemon(choices.get(0));
-*/
+		david.addPokemon(choices.get(2));
+
 
 		//battle(alec.getTeam().get(0),david.getTeam().get(0));
 
-		teamSelect(alec);
-		teamSelect(david);
+		//teamSelect(alec);
+		//teamSelect(david);
 
-		music.play();
-		letsFight(alec,david);
+	}
 
+	public ArrayList<Trainer> getTrainers()
+	{
+		ArrayList<Trainer> trainers = new ArrayList<Trainer>();
+
+		trainers.add(alec);
+		trainers.add(david);
+
+		return trainers;
+	}
+
+	public ArrayList<Pokemon> getChoices()
+	{
+		return choices;
+	}
+
+	public void replaceP1(Trainer ash)
+	{
+		alec = new Trainer(ash);
+	}
+
+	public void replaceP2(Trainer ash)
+	{
+		david = new Trainer(ash);
 	}
 
 	public static void teamSelect(Trainer gary)
@@ -81,6 +110,11 @@ public class PokeBattle
 		gary.addPokemon(new Pokemon(choices.get(pick-1)));
 
 		System.out.println("\n");
+	}
+
+	public static void teamSelect(Trainer ash, int selection)
+	{
+		ash.addPokemon(new Pokemon(choices.get(selection)));
 	}
 
 
@@ -113,13 +147,22 @@ public class PokeBattle
 			return false;
 	}
 
+	public Pokemon getCurrentPoke(Trainer x)
+	{
+		if(x.getPlayer() == 1)
+			return alec.getTeam().get(currentPokeS);
+		else if(x.getPlayer() == 2)
+			return david.getTeam().get(currentPokeH);
+		return new Pokemon();
+	}
+
 	public static void letsFight(Trainer student, Trainer hayes)
 	{
 		int stuTeam = student.teamSize()-1;
 		int hayesTeam = hayes.teamSize()-1;
 
-		int currentPokeS = 0;
-		int currentPokeH = 0;
+		currentPokeS = 0;
+		currentPokeH = 0;
 
 		while(stuTeam > 0 && hayesTeam > 0)
 		{

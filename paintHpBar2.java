@@ -10,16 +10,18 @@ public class paintHpBar2 extends JApplet
 {
 		int maxHp, currentHp;
 		double hpBarVal;
+
 		public paintHpBar2(Pokemon name)
 		{
-			maxHP = name.getHP();
-			currentHp = name.getHP();
+			this.maxHp = name.getHP();
+			this.currentHp = name.getHP();
 		}
 
 		public void draw(Graphics g)
 		{
+			g.setColor(Color.green);
 			hpBarVal = (  (currentHp/maxHp) * 100);
-			g.fillRect(616,366,hpBarVal, 20);
+			g.fillRect(616,366,(int)hpBarVal, 20);
 
 		}
 

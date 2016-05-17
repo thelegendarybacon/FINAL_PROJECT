@@ -1,4 +1,4 @@
-//David Moawt.*;
+//David Mo
 import java.awt.*;
 import javax.swing.*;
 import java.applet.Applet;
@@ -9,11 +9,11 @@ public class paintPokemon extends JApplet
 {
 	private int x , y;
 	Image hold;
-	public paintPokemon(Image img)
+	public paintPokemon(Image img, int xtemp, int ytemp)
 	{
 		hold = img;
-		x = 200;
-		y = 200;
+		x = xtemp;
+		y = ytemp;
 	}
 
 	public void draw(Graphics g)

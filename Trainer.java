@@ -12,6 +12,12 @@ public class Trainer
 		this.playerNum = x;
 	}
 
+	public Trainer(Trainer next)
+	{
+		this.name = next.getName();
+		this.playerNum = next.getPlayer();
+	}
+
 	public void addPokemon(Pokemon mo)
 	{
 		this.team.add(mo);
@@ -30,6 +36,11 @@ public class Trainer
 	public ArrayList<Pokemon> getTeam()
 	{
 		return team;
+	}
+
+	public void replaceTeam(ArrayList<Pokemon> squad)
+	{
+		this.team = squad;
 	}
 
 	public int teamSize()

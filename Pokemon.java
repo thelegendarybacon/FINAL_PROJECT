@@ -1,14 +1,19 @@
 /*
 Pokemon Class
-
 Stores used to make a pokemon object storing the specific pokemon's data
 */
 
 import java.util.ArrayList;
+import java.awt.*;
+import javax.swing.*;
+import java.applet.Applet;
+import java.io.*;
+import java.awt.event.*;
 
 public class Pokemon
 {
 	public MoveList atks = new MoveList();
+	public paintHpBar bar;
 
 	private String name, type;
 	private Move move1, move2, move3, move4;
@@ -20,6 +25,7 @@ public class Pokemon
 		this.name = "";
 		this.hp = 0;
 		this.PP = 0;
+		bar = new paintHpBar(this);
 	}
 
 	public Pokemon(Pokemon inherit)
@@ -29,6 +35,7 @@ public class Pokemon
 		this.PP = inherit.getPP();
 		this.moves = inherit.getMoves();
 		this.type = inherit.getType();
+		this.bar = inherit.getBar();
 	}
 
 
@@ -37,6 +44,7 @@ public class Pokemon
 		this.name = who;
 		this.hp = health;
 		this.PP = 100;
+		bar = new paintHpBar(this);
 
 		if(name.equals("Pikachu"))
 		{
@@ -103,6 +111,11 @@ public class Pokemon
 		return hp;
 	}
 
+	public paintHpBar getBar()
+	{
+		return bar;
+	}
+
 	public int getPP()
 	{
 		return PP;
@@ -111,6 +124,7 @@ public class Pokemon
 	public void takeDMG(int dmg)
 	{
 		this.hp = hp - dmg;
+		bar.changeHP(this);
 	}
 
 	public void reducePP(int reduce)
